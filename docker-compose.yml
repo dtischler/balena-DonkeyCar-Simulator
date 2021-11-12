@@ -16,7 +16,12 @@ services:
             - "/dev:/dev"    
         labels:
             io.balena.features.dbus: '1'
-    nginx:
-        build: ./nginx
         ports:
-            - 80:80
+            - 9091:9091/tcp
+            - 9091:9091/udp
+            - 80:8887
+                
+    #nginx:
+    #    build: ./nginx
+    #    ports:
+    #        - 80:80

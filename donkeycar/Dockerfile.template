@@ -3,7 +3,6 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-ubuntu:focal
 ARG DEBIAN_FRONTEND=noninteractive
 ARG venv_name=env
 ENV UDEV=1
-EXPOSE 8887
 
 WORKDIR /usr/src/app
 
@@ -32,7 +31,7 @@ RUN echo 'DONKEY_GYM_ENV_NAME = "donkey-generated-track-v0"' >> mysim/myconfig.p
 RUN echo 'GYM_CONF = { "body_style" : "car01", "body_rgb" : (255, 0, 0), "car_name" : "balena", "font_size" : 100}' >> mysim/myconfig.py
 
 #COPY start.sh start.sh
-EXPOSE 9091
+
 CMD ["/bin/bash"]
 # RUN cd mysim && python3 manage.py drive
 
