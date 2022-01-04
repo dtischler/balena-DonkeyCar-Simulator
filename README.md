@@ -71,19 +71,15 @@ This is great, but, there are no cars driving around yet.  Time to move on to th
 
 ### Option 1, the Easy Way
 
-With your Simulator up and running, it's time to go for a virtual drive!  In balenaCloud, on the Device Details page, open up an SSH session to the DonkeyCar container with the Terminal interface at the bottom right portion of the screen:
-
-![](/images/img3.png)
+With your Simulator up and running, it's time to go for a virtual drive!  In balenaCloud, on the Device Details page, open up an SSH session to the DonkeyCar container with the Terminal interface at the bottom right portion of the screen.  
 
 Type in `cd mysim && python3 manage.py drive` and press Enter. The script will launch, and take a moment to complete, but will eventually reach `Starting vehicle at 20 Hz`. 
 
+![](/images/img3.png)
+
+Check the IP address of your device in the balenaCloud dashboard. Make note of this IP. Open a web browser, and go to `http://ip-address-of-your-device/drive`. In my example, this would be `http://192.168.0.196/drive`.
+
 ![](/images/img4.png)
-
-![](/images/img5.png)
-
-Check the IP address of your Raspberry Pi in the balenaCloud dashboard. Make note of this IP. Open a web browser, and go to `http://ip-address-of-your-device/drive`. In my example, this would be `http://192.168.0.196/drive`.
-
-![](/images/img6.png)
 
 In the throttle and steering applet on that page, click and drag just a tiny bit up from center, and your virtual car should start to move!  Alternatively, you can use the `I, K, J, and L` keys on the keyboard to nudge the car forward, backward, left, and right.  Remember, this is the exact same software stack as the real DonkeyCar, so if you had built a physical racer, it would start driving as well.  As mentioned earlier, the official DonkeyCar documentation is very thorough, so you can refer to those Docs for more detailed usage. But keep in mind these important details:
 
@@ -94,6 +90,8 @@ In the throttle and steering applet on that page, click and drag just a tiny bit
 - Over in the balenaCloud Dashboard, in that Terminal window, press `Control-C` on the keyboard to exit out of the DonkeyCar application.
 - You will see all of the data get written out in a table, and the raw files are stored in the `data` directory inside of that `mycar` folder.
 
+![](/images/img5.png)
+
 ![](/images/img7.png)
 
 ### Option 2, The Extra Device Way
@@ -102,21 +100,23 @@ Because this DonkeyCar Simulator is now serving up connections, you can actually
 
 If you follow the steps in that repo, you end up with a virtual DonkeyCar that can connect to your newly provisioned Donkey Server.  Of course, other users can also do the same, and your Server can be used to host races, allow external users to drive and practice, capture data for training, etc.  Your DonkeyCar Simulation Server could be a valuable resource for your Autonomous Vehicle club, Robotics club, or more!
 
+![](/images/img6.png)
+
+![](/images/img8.png)
+
+
 ## Train
 
 Back in balenaCloud and inside the terminal session we opened, now that we have a bit of sample data recorded and saved, it's time to begin training our model. Remember, as mentioned above, it is NOT very efficient to train directly on a Raspberry Pi or x86 CPU, and using a cloud server or a desktop PC with a GPU will be MUCH faster. However, simply for learning purposes and to keep things organized and in one place, we will in this situation train directly on the device. It could literally take 8 to 10 hours or more, so, grab a cup of tea, and sip it VERY slowly. Or do something else in the meantime.
 
 In the terminal session in balenaCloud, and still within the DonkeyCar container, run `donkey train --tub ./data --model ./models/myawesomepilot.h5`. Now go do something else.
 
-![](/images/img8.png)
-
 Fast forward 10 or so hours, and returning to balenaCloud, you should see that process has completed. The output of all that hard work is the model file. Double check that everything completed successfully, and you should have a file sitting in the `models` directory called `myawesomepilot.h5`
-
-![](/images/img9.png)
 
 ### Speeding Up Training
 
 Knowing full well that training on this device is not ideal, we simply want to demonstrate functionality in this GitHub repo. If you are interested in offloading the Tub data and training on a GPU or Cloud server, have a look at the official DonkeyCar docs here: https://docs.donkeycar.com/guide/train_autopilot/#transfer-data-from-your-car-to-your-computer. That will help immensely. :-)
+
 
 ## Drive Autonomously
 
@@ -128,7 +128,6 @@ With the model now ready (hope you slept well), you can try to let the DonkeyCar
 - On the left, click the dropdown menu for Mode and Pilot, and choose Local Pilot.
 - The DonkeyCar should begin to make it's way around the track (hopefully).
 
-![](/images/img10.png)
 
 ## Conclusions
 
