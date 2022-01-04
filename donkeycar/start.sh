@@ -4,3 +4,4 @@ export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 X &
 xfce4-session &
 # cd /usr/src/app/mysim && python3 manage.py drive
+/usr/src/app/DonkeySimLinux/donkey_sim.x86_64
